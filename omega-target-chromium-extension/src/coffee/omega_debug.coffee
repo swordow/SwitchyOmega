@@ -1,3 +1,8 @@
+#https://stackoverflow.com/questions/73778202/using-window-globals-in-manifestv3-service-worker-background-script
+if not globalThis.window
+  globalThis.window = globalThis
+  globalThis.global = globalThis
+  
 window.OmegaDebug =
   getProjectVersion: ->
     chrome.runtime.getManifest().version

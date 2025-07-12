@@ -14,6 +14,7 @@ module.exports =
     space_operators: level: 'error'
     # https://github.com/clutchski/coffeelint/issues/525
     indentation: level: 'ignore'
+    max_line_length: level: 'ignore'
 
   gruntfile: ['Gruntfile.coffee']
   tasks: ['grunt/**/*.coffee']

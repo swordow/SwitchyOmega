@@ -31,35 +31,47 @@ module.exports = class Inspect
       documentUrlPatterns: webResource
     })
     ###
+    chrome.runtime.onInstalled.addListener ->
+      chrome.contextMenus.create({
+        id: 'inspectFrame'
+        title: chrome.i18n.getMessage('contextMenu_inspectFrame')
+        contexts: ['frame']
+        documentUrlPatterns: webResource
+      })
+      chrome.contextMenus.create({
+        id: 'inspectLink'
+        title: chrome.i18n.getMessage('contextMenu_inspectLink')
+        contexts: ['link']
+        targetUrlPatterns: webResource
+      })
+      chrome.contextMenus.create({
+        id: 'inspectElement'
+        title: chrome.i18n.getMessage('contextMenu_inspectElement')
+        contexts: [
+          'image'
+          'video'
+          'audio'
+        ]
+        targetUrlPatterns: webResource
+      })
 
-    chrome.contextMenus.create({
-      id: 'inspectFrame'
-      title: chrome.i18n.getMessage('contextMenu_inspectFrame')
-      contexts: ['frame']
-      onclick: @inspect.bind(this)
-      documentUrlPatterns: webResource
-    })
+    chrome.contextMenus.onClicked.addListener((info, tab) =>
+      switch info.menuItemId
+        when 'inspectFrame'
+          @inspect.bind(this)
+    )
+    
+    chrome.contextMenus.onClicked.addListener((info, tab) =>
+      switch info.menuItemId
+        when 'inspectLink'
+          @inspect.bind(this)
+    )
 
-    chrome.contextMenus.create({
-      id: 'inspectLink'
-      title: chrome.i18n.getMessage('contextMenu_inspectLink')
-      contexts: ['link']
-      onclick: @inspect.bind(this)
-      targetUrlPatterns: webResource
-    })
-
-    chrome.contextMenus.create({
-      id: 'inspectElement'
-      title: chrome.i18n.getMessage('contextMenu_inspectElement')
-      contexts: [
-        'image'
-        'video'
-        'audio'
-      ]
-      onclick: @inspect.bind(this)
-      targetUrlPatterns: webResource
-    })
-
+    chrome.contextMenus.onClicked.addListener((info, tab) =>
+      switch info.menuItemId
+        when 'inspectElement'
+          @inspect.bind(this)
+    )
     @_enabled = true
 
   disable: ->
