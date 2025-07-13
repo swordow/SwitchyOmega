@@ -1,5 +1,7 @@
 import "./js/omega_debug.js"
 import "./js/background_preload.js"
+// copy from https://github.com/zero-peak/ZeroOmega/blob/master/omega-target-chromium-extension/overlay/idb-keyval.js
+import "./idb-keyval.js"
 import "./localstorage_polyfill.js"
 import "./js/log_error.js"
 // import "./lib/FileSaver/FileSaver.min.js"

@@ -334,6 +334,10 @@ chrome.runtime.onMessage.addListener (request, sender, respond) ->
     if request.method == 'getState'
       target = state
       method = state.get
+	//https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
+    else if request.method == 'setState'
+      target = state
+      method = state.set
     else
       target = options
       method = target[request.method]

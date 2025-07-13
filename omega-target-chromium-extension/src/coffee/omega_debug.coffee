@@ -3,6 +3,7 @@ if not globalThis.window
   globalThis.window = globalThis
   globalThis.global = globalThis
   
+console.log("OmegaDebug initializing...")
 window.OmegaDebug =
   getProjectVersion: ->
     chrome.runtime.getManifest().version

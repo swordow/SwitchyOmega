@@ -52,10 +52,19 @@ class ChromeOptions extends OmegaTarget.Options
           text: '?'
           color: '#49afcd'
     chrome.action.setBadgeText(text: options.text)
+    .catch((e) ->
+      console.log('setBadgeText error:',e)
+    )
     chrome.action.setBadgeBackgroundColor(color: options.color)
+    .catch((e) ->
+      console.log('setBadgeBackgroundColor error:',e)
+    )
     if options.title
       @_badgeTitle = options.title
       chrome.action.setTitle(title: options.title)
+      .catch((e) ->
+        console.log('setTitle error:',e)
+      )
     else
       @_badgeTitle = null
   clearBadge: ->
@@ -136,17 +145,28 @@ class ChromeOptions extends OmegaTarget.Options
           info.badgeSet = true
           badge = {text: info.errorCount.toString(), color: '#f0ad4e'}
           chrome.action.setBadgeText(text: badge.text, tabId: tabId)
+          .catch((e) ->
+            console.log('setBadgeText error:',e)
+          )
           chrome.action.setBadgeBackgroundColor(
             color: badge.color
             tabId: tabId
           )
+          .catch((e) ->
+            console.log('setBadgeBackgroundColor error:',e)
+          )
         else if info.badgeSet
           info.badgeSet = false
           chrome.action.setBadgeText(text: '', tabId: tabId)
+          .catch((e) ->
+            console.log('setBadgeText error:',e)
+          )
         @_tabRequestInfoPorts[tabId]?.postMessage({
           errorCount: info.errorCount
           summary: info.summary
-        })
+        }).catch((e) ->
+            console.log('_tabRequestInfoPorts postMessage error:',e)
+        )
 
       chrome.runtime.onConnect.addListener (rawPort) =>
         return unless rawPort.name == 'tabRequestInfo'

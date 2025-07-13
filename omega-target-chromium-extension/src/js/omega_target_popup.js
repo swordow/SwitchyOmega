@@ -24,19 +24,9 @@ var requestInfoCallback = null;
 
 OmegaTargetPopup = {
   getState: function (keys, cb) {
-    if (typeof localStorage === 'undefined' || !localStorage.length) {
-      callBackground('getState', [keys], cb);
-      return;
-    }
-    var results = {};
-    keys.forEach(function(key) {
-      try {
-        results[key] = JSON.parse(localStorage['omega.local.' + key]);
-      } catch (_) {
-        return null;
-      }
-    });
-    if (cb) cb(null, results);
+    //https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
+    callBackground('getState', [keys], cb);
+    return;
   },
   applyProfile: function (name, cb) {
     callBackgroundNoReply('applyProfile', [name], cb);
