@@ -321,12 +321,16 @@ encodeError = (obj) ->
 refreshActivePageIfEnabled = ->
   return if localStorage['omega.local.refreshOnProfileChange'] == 'false'
   chrome.tabs.query {active: true, lastFocusedWindow: true}, (tabs) ->
-    url = tabs[0].url
+    #https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
+    url = tabs[0].url or tabs[0].pendingUrl 
     return if not url
     return if url.substr(0, 6) == 'chrome'
     return if url.substr(0, 6) == 'about:'
     return if url.substr(0, 4) == 'moz-'
-    chrome.tabs.reload(tabs[0].id, {bypassCache: true})
+    if tabs[0].pendingUrl
+      chrome.tabs.update(tabs[0].id, {url: url})
+    else
+      chrome.tabs.reload(tabs[0].id, {bypassCache: true})
 
 chrome.runtime.onMessage.addListener (request, sender, respond) ->
   return unless request and request.method

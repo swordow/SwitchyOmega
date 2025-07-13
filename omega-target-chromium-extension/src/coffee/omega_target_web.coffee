@@ -133,10 +133,11 @@ angular.module('omegaTarget', []).factory 'omegaTarget', ($q) ->
       clearBadge = true
       d = $q['defer']()
       chrome.tabs.query {active: true, lastFocusedWindow: true}, (tabs) ->
-        if not tabs[0]?.url
+        #https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
+        if tabs.length == 0 or not (tabs[0].pendingUrl || tabs[0].url)
           d.resolve(null)
           return
-        args = {tabId: tabs[0].id, url: tabs[0].url}
+        args = {tabId: tabs[0].id, url: tabs[0].pendingUrl || tabs[0].url}
         if tabs[0].id and requestInfoCallback
           connectBackground('tabRequestInfo', args,
             requestInfoCallback)
@@ -145,8 +146,13 @@ angular.module('omegaTarget', []).factory 'omegaTarget', ($q) ->
     refreshActivePage: ->
       d = $q['defer']()
       chrome.tabs.query {active: true, lastFocusedWindow: true}, (tabs) ->
-        if tabs[0].url and not isChromeUrl(tabs[0].url)
-          chrome.tabs.reload(tabs[0].id, {bypassCache: true})
+        #https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
+        url = tabs[0].pendingUrl || tabs[0].url
+        if url and not isChromeUrl(url)
+          if tabs[0].pendingUrl
+            chrome.tabs.update(tabs[0].id, {url})
+          else
+            chrome.tabs.reload(tabs[0].id, {bypassCache: true})
         d.resolve()
       return d.promise
     openManage: ->
