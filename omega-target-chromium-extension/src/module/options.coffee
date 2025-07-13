@@ -110,12 +110,16 @@ class ChromeOptions extends OmegaTarget.Options
           index = (index + 1) % profiles.length
           @applyProfile(profiles[index]).then =>
             if @_options['-refreshOnProfileChange']
-              url = tab.url
+              #https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
+              url = tab.pendingUrl or tab.url
               return if not url
               return if url.substr(0, 6) == 'chrome'
               return if url.substr(0, 6) == 'about:'
               return if url.substr(0, 4) == 'moz-'
-              chrome.tabs.reload(tab.id)
+              if tab.pendingUrl
+                chrome.tabs.update(tab.id, {url: url})
+              else
+                chrome.tabs.reload(tab.id)
     else
       chrome.action.setPopup({popup: 'popup/index.html'})
 

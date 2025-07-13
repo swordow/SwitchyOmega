@@ -1,4 +1,4 @@
-//https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
+#https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
 Storage = require('./storage')
 Promise = require('bluebird')
 
