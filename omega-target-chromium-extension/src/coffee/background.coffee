@@ -322,7 +322,7 @@ refreshActivePageIfEnabled = ->
   return if localStorage['omega.local.refreshOnProfileChange'] == 'false'
   chrome.tabs.query {active: true, lastFocusedWindow: true}, (tabs) ->
     #https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
-    url = tabs[0].url or tabs[0].pendingUrl 
+    url = tabs[0].url or tabs[0].pendingUrl
     return if not url
     return if url.substr(0, 6) == 'chrome'
     return if url.substr(0, 6) == 'about:'
