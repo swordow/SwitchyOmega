@@ -56,7 +56,7 @@ OmegaTargetPopup = {
   },
   getActivePageInfo: function(cb) {
     chrome.tabs.query({active: true, lastFocusedWindow: true}, function (tabs) {
-      #https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
+      //https://github.com/zero-peak/ZeroOmega/commit/6c56da0360a7c4940418b5221b8331565c994d20
       if (tabs.length === 0 || !(tabs[0].pendingUrl || tabs[0].url)) return cb();
       var args = {tabId: tabs[0].id, url: tabs[0].pendingUrl || tabs[0].url};
       callBackground('getPageInfo', [args], cb)
