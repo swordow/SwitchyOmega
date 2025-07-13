@@ -44,7 +44,11 @@ class TrackedEvent
         this[methodName] = method.bind(@event)
 
   addListener: (callback) ->
-    @event.addListener(callback)
+    @event.addListener =>
+      if !chrome.runtime.lastError
+        callback()
+      else
+        console.log("error: ", this)
     @callbacks.push(callback)
     return this
 
