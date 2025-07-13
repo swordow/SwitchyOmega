@@ -53,7 +53,7 @@ class ChromeTabs
         })
         @clearIcon tab.id
       return
-    @actionForUrl(tab.url).then ((action) =>
+    temp = @actionForUrl(tab.url).then ((action) =>
       if not action
         @clearIcon tab.id
         return
@@ -62,9 +62,11 @@ class ChromeTabs
         chrome.action.setTitle({title: action.title, tabId: tab.id})
       else
         chrome.action.setTitle({title: action.shortTitle, tabId: tab.id})
-    ).catch((e) ->
+    )
+    temp.catch((e) ->
       console.log('error:', e)
     )
+    return temp
 
   setTabBadge: (tab, badge) ->
     @_badgeTab ?= {}
