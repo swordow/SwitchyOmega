@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Weblate 4.14-dev\n"
 
 msgid "appNameShort"
-msgstr "SwitchyOmega"
+msgstr "SwitchyOmegaYA"
 
 msgid "manifest_app_name"
 msgstr "Прокси SwitchyOmega"
