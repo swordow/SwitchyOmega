@@ -16,11 +16,11 @@ msgstr ""
 
 #, fuzzy
 msgid "appNameShort"
-msgstr "SwitchyOmega"
+msgstr "SwitchyOmegaYA"
 
 #, fuzzy
 msgid "manifest_app_name"
-msgstr "Proxy SwitchyOmega"
+msgstr "Proxy SwitchyOmegaYA"
 
 msgid "manifest_app_description"
 msgstr "Spravuj a prepínaj medzi viacerými proxy rýchlo a jednoducho."

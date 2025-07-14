@@ -15,10 +15,10 @@ msgstr ""
 "X-Generator: Weblate 4.2-dev\n"
 
 msgid "appNameShort"
-msgstr "SwitchyOmega"
+msgstr "SwitchyOmegaYA"
 
 msgid "manifest_app_name"
-msgstr "Proxy SwitchyOmega"
+msgstr "Proxy SwitchyOmegaYA"
 
 msgid "manifest_app_description"
 msgstr ""
@@ -1121,7 +1121,7 @@ msgstr ""
 msgid "about_copyright"
 msgstr ""
 "Telif Hakkı 2012-2019 <a href='https://github.com/FelisCatus/SwitchyOmega/"
-"blob/master/AUTHORS'>SwitchyOmega Yazarları</a>. Tüm hakları saklıdır."
+"blob/master/AUTHORS'>SwitchyOmegaYAzarları</a>. Tüm hakları saklıdır."
 
 msgid "about_credits"
 msgstr ""
